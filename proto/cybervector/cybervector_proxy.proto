@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package cybervector;
+option go_package = "github.com/cyb3rdog/escape-pod-proxy/proto/lang/go/cybervector";
+
+service CyberVectorProxyService {
+  rpc GetStatus (StatusRequest) returns (StatusResponse) {}
+
+  rpc Subscribe (SubscribeRequest) returns (stream ProxyMessaage) {}
+  rpc UnSubscribe (UnsubscribeRequest) returns (ProxyMessaage) {}
+
+  rpc InsertIntent (InsertIntentRequest) returns (InsertIntentResponse) {}
+  rpc SelectIntents (SelectIntentRequest) returns (SelectIntentResponse) {}
+  rpc DeleteIntent (DeleteIntentRequest) returns (DeleteIntentResponse) {}
+}
+
+
+message ResponseMessage {
+  enum ResponseCode {
+    SUCCESS = 0;
+    FAILURE = 1;
+  }
+  ResponseCode code = 1;
+  string message = 2;
+}
+
+message StatusRequest {
+}
+
+message StatusResponse {
+  string Version = 1;
+  int32 Subscribed = 2;
+}
+
+enum MessageType {
+  Unknown = 0;
+  Subscribed = 1;
+  Unsubscribed = 2;
+  KeepAlive = 3;
+  ProcessIntent = 4;
+}
+
+message SubscribeRequest {
+  // keep alive stream interval in seconds,
+  // requested from client, default 30 seconds
+  int64 keep_alive = 1;
+}
+
+message UnsubscribeRequest {
+  string uuid = 1;
+}
+
+message ProxyMessaage {
+  // Proxy Message Type enum
+  MessageType message_type = 1;
+  // Proxy Message Json data
+  string message_data  = 2;
+  // The named intent to respond with.
+  string intent_name = 3;
+  // A list of parameters as parsed by the escape pod
+  map<string, string> parameters = 4;
+}
+
+
+message InsertIntentRequest {
+  string intent_data = 1;
+}
+
+message InsertIntentResponse {
+  ResponseMessage response = 1;
+  string inserted_oid = 2;
+}
+
+message SelectIntentRequest {
+  string filter_json = 1;
+}
+
+message SelectIntentResponse {
+  ResponseMessage response = 1;
+  string filter_json = 2;
+  map<string, string> intent_data = 3;
+}
+
+message DeleteIntentRequest {
+  string intent_id = 1;
+}
+
+message DeleteIntentResponse {
+  ResponseMessage response = 1;
+  bool deleted = 2;
+}
