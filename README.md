@@ -1,8 +1,13 @@
-﻿
-# EscapePod Extension SDK
+# EscapePod Extension SDK for Python
 #### by cyb3rdog
 
 This is the EscapePod Python SDK for Cyb3rVector's EscapePod Extension Proxy.
+
+With this SDK, you can:
+- maintain all your EscapePod intents from Python code
+- dynamically create new extension intents from code
+- react to and override all Vector's voice commands, including those created on the fly
+- and more...
 
 
 ## Getting Started
@@ -36,7 +41,8 @@ If you want to know where the SDK files are installed, use following command:
 
 ## Extension Deployement
 
-#### **Please see the [deployment guide here](deployment/)**
+#### **Please see the [deployment guide here](deployment/)**.
+EscapePod Extension Proxy itself, and its source code is maintained in separate repository: [cyb3rdog/escape-pod-proxy](https://github.com/cyb3rdog/escape-pod-proxy).
 
 
 ## Tutorials
