@@ -1,4 +1,4 @@
-## Example programs for the Cyb3rVector's EscapePod Extension Proxy Python SDK
+## Example programs for the Cyb3rVector's EscapePod Extension SDK
 
 This folder contains a tutorial python scripts to provide you with a progression
 from simple examples all the way up to more advanced programs.
