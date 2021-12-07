@@ -16,13 +16,13 @@
 
 """The Final example script of this SDK.
 
-This script wraps all the previous examples and creates a scenario, where 
-a new escapepod extension intent is created dynamically from this code, 
+This script wraps all the previous examples and creates a scenario, where
+a new escapepod extension intent is created dynamically from this code,
 and demonstrates the capability of this SDK to inmediatelly react to such
-dynamically created voice commands. 
+dynamically created voice commands.
 Besides, it demoes how to query the intent data from database, and delete
-them. 
-When Vector recognizes the specified keywords, the escapepod extension 
+them.
+When Vector recognizes the specified keywords, the escapepod extension
 proxy fires the event back to this script's event handler, where Vector's
 behaviour is overriden with Vector's final speech.
 Once done, thread is marked as complete and program exits and cleanes
@@ -30,7 +30,7 @@ after itself.
 This program will run for 120 seconds or until Ctrl+C keys are pressed.
 
 I Hope these examples has provided you with a esential training of how to
-use this "EscapePod SDK for Python" and that it will open for you brand 
+use this "EscapePod SDK for Python" and that it will open for you brand
 new possibilites of how to enjoy your EscapePod.
 
 Enjoy!
@@ -50,11 +50,12 @@ from escapepod_sdk.messages import process_intent
 
 
 def on_intent_heard(robot: anki_vector.Robot, event_name, msg: process_intent, done):
-    robot.conn.request_control(ControlPriorityLevel.OVERRIDE_BEHAVIORS_PRIORITY)
-    time.sleep(0.1)
-    robot.behavior.say_text(f"Yeah, this is so cool! I've received the {msg.intent_name.replace('_',' ')} command.")
-    robot.conn.release_control()
-    done.set()
+    if msg.intent_name == "final_intent":
+        robot.conn.request_control(ControlPriorityLevel.OVERRIDE_BEHAVIORS_PRIORITY)
+        time.sleep(0.1)
+        robot.behavior.say_text(f"Yeah, this is so cool! I've received the {msg.intent_name.replace('_',' ')} command.")
+        robot.conn.release_control()
+        done.set()
 
 def main():
     print("\nEscapePod Extension Proxy Final Example:\nPress Ctrl+C to exit...\n")
@@ -73,7 +74,7 @@ def main():
             try:
                 # Look up the database if the final_intent has been indeed created
                 intents = client.intents.select_intents('{"intent": "final_intent"}')
-            
+
                 if len(intents) == 1:
                     # Lets print some information
                     print(f"\nNew EscapePod Extension intent successfully created!")
