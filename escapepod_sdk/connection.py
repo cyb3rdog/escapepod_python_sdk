@@ -186,7 +186,7 @@ class Connection:
             except grpc.FutureTimeoutError as e:
                 raise EscapePodNotFoundException() from e
 
-            self._interface = client.CyberVectorProxyServiceStub(self._channel)            
+            self._interface = client.CyberVectorProxyServiceStub(self._channel)
 
         except grpc.RpcError as rpc_error:  # pylint: disable=broad-except
             setattr(self._ready_signal, "exception", connection_error(rpc_error))
@@ -316,7 +316,7 @@ def on_connection_thread(log_messaging: bool = True) -> Callable[[Coroutine[util
         function. Defaults to 'None' implying no support for responding to cancellation.
     :returns: A decorator which has 3 possible returns based on context: the result of the decorated function,
         the :class:`concurrent.futures.Future` which points to the decorated function, or the
-        :class:`asyncio.Future` which points to the decorated function.        
+        :class:`asyncio.Future` which points to the decorated function.
     """
     def _on_connection_thread_decorator(func: Coroutine) -> Any:
         """A decorator which specifies a function to be executed on the connection thread
@@ -336,7 +336,7 @@ def on_connection_thread(log_messaging: bool = True) -> Callable[[Coroutine[util
             adds logging to incoming (from the escapepod extension) and outgoing (to the escapepod extension) messages.
             """
             result = None
-            # TODO: only have the request wait for control if we're not done. If done raise an exception.            
+            # TODO: only have the request wait for control if we're not done. If done raise an exception.
             message = args[1:]
             outgoing = message if log_messaging else "size = {} bytes".format(sys.getsizeof(message))
             logger.debug(f'Outgoing {func.__name__}: {outgoing}')
@@ -368,7 +368,7 @@ def on_connection_thread(log_messaging: bool = True) -> Callable[[Coroutine[util
                     return asyncio.ensure_future(wrapped_coroutine, loop=self.conn.loop)
                 raise EscapePodAsyncException("\n\nThe connection thread loop is not running, but a "
                                            "function '{}' is being invoked on that thread.\n".format(func.__name__ if hasattr(func, "__name__") else func))
-            future = asyncio.run_coroutine_threadsafe(wrapped_coroutine, self.conn.loop)      
+            future = asyncio.run_coroutine_threadsafe(wrapped_coroutine, self.conn.loop)
 
             if _return_future:
                 return future
@@ -378,4 +378,4 @@ def on_connection_thread(log_messaging: bool = True) -> Callable[[Coroutine[util
                 self.logger.warning(f"{func.__name__} cancelled because behavior control was lost")
                 return None
         return result
-    return _on_connection_thread_decorator 
+    return _on_connection_thread_decorator

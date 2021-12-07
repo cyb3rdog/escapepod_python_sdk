@@ -37,7 +37,7 @@ class Client:
 
     def __init__(self,
                  ip: str = None,
-                 port: str = None,                 
+                 port: str = None,
                  robot: object = None,
                  keep_alive: int = 60,
                  default_logging: bool = True):
@@ -52,7 +52,7 @@ class Client:
 
         if (self._ip is None):
             raise ValueError("The escapepod_sdk.extension.Client object requires Cyb3rVector EscapePod Extension Proxy IP address.")
-                             
+
         #: :class:`escapepod_sdk.connection.Connection`: The active connection to the escapepod extension proxy.
         self._conn = Connection(':'.join([self._ip, self._port]))
         self._events = events.EventHandler(self, robot, keep_alive)

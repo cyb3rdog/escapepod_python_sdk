@@ -29,7 +29,7 @@ def main():
     os.environ.setdefault('SDK_LOG_LEVEL', "DEBUG")
     # Replace the "XX.XX.XX.XX" with and ip where the escapepod extension proxy is deployed.
     # By default its usually deployed on the escapepod itself, so its same as your escapepod ip.
-    with escapepod_sdk.extension.Client("XX.XX.XX.XX", keep_alive=3) as client:        
+    with escapepod_sdk.extension.Client("XX.XX.XX.XX", keep_alive=3) as client:
         try:
             time.sleep(15)
         except KeyboardInterrupt:

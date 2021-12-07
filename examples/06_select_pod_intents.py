@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Select and display escapepod intents 
+"""Select and display escapepod intents
 
 This script demonstrates the EscapePod extension capabilities to query the intents
 from EscapePod's MongoDB database and use of mongoDB unmarshal json2bson filter.
@@ -25,7 +25,7 @@ escapepod, and as second, all the intents which are configured for "external par
 
 import escapepod_sdk
 
-def select_intents(client: escapepod_sdk.extension.Client, filter: str = '{}'):    
+def select_intents(client: escapepod_sdk.extension.Client, filter: str = '{}'):
     print(f"Selecing escapepod intents using filter: {filter}:")
     intents = client.intents.select_intents(filter)
     for intent in intents:
@@ -33,7 +33,7 @@ def select_intents(client: escapepod_sdk.extension.Client, filter: str = '{}'):
     print(f" Total of {len(intents)} intents found.\n")
 
 def main():
-    # Replace the "XX.XX.XX.XX" with and ip where the escapepod extension proxy is deployed.    
+    # Replace the "XX.XX.XX.XX" with and ip where the escapepod extension proxy is deployed.
     with escapepod_sdk.extension.Client("XX.XX.XX.XX") as client:
         print("\nEscapePod Extension Select Intents Example:\n")
         select_intents(client, '{}')

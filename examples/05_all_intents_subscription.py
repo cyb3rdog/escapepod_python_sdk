@@ -41,16 +41,16 @@ import escapepod_sdk
 from escapepod_sdk.messages import process_intent
 
 
-def main():    
-    class event_processor():            
+def main():
+    class event_processor():
         def on_voice_command(robot: anki_vector.Robot, source: str, intent_name: str):
             """This event handler gathers the voice commands from all the sources, and processes them"""
             print(f"{source} voice command heard: '{intent_name}'")
             robot.conn.request_control(ControlPriorityLevel.OVERRIDE_BEHAVIORS_PRIORITY)
             time.sleep(0.1)
-            robot.behavior.say_text(f"I've heard a {source} command: {intent_name.replace('_',' ')}")            
+            robot.behavior.say_text(f"I've heard a {source} command: {intent_name.replace('_',' ')}")
             robot.conn.release_control()
-        
+
         def on_intent_heard(robot: anki_vector.Robot, event_name, msg: process_intent):
             """This event handler provides with intents received trough escapepod extension"""
             event_processor.on_voice_command(robot, "Escape Pod Extension", msg.intent_name)

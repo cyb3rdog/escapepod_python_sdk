@@ -214,7 +214,7 @@ class EventHandler:
     def _unpack_event(self, response):
         event_name = protocol.MessageType.Name(response.message_type)
         event_data = response.message_data
-        
+
         if event_name == 'KeepAlive':
             event_data = keep_alive(response)
         if event_name == "ProcessIntent":

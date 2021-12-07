@@ -16,7 +16,7 @@
 
 """React to escapepod extension voice commands given to Vector
 
-This script demonstrates the capability of reacting to escape pod 
+This script demonstrates the capability of reacting to escape pod
 voice commands and extending Vector's behaviours with this Python SDK.
 
 The ProcessIntent event is only dispatched when the escape pod intent
@@ -28,7 +28,7 @@ or use this SDK's IntentFactory class to create custom intents from code.
 'final_intent' value have to match the intent_name - the 'Behavior' field).
 
 After the robot hears "Hey Vector!..." and a valid voice command is given
-(for example "...whats the wheater?") the event will be dispatched and 
+(for example "...whats the wheater?") the event will be dispatched and
 its data will be spoken by Vector and also displayed on the screen.
 
 This program will run for 120 seconds or until Ctrl+C keys are pressed.

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-A class providing with extension proxy's intent manipulation rpc calls 
+A class providing with extension proxy's intent manipulation rpc calls
 """
 
 # __all__ should order by constants, event classes, other classes, functions.
@@ -32,7 +32,7 @@ from .exceptions import EscapePodProxyException
 class ResponseCode(Enum):
     """Specifies the Response Message Code."""
     SUCCESS = 0
-    FAILURE = 1 
+    FAILURE = 1
 
 class IntentFactory(util.Component):
     """Handles communication and provides with factory for EscapePod Intents"""
@@ -42,7 +42,7 @@ class IntentFactory(util.Component):
         """
         """
         if name == None or name == "":
-            raise EscapePodProxyException("Intent name is mandatory")        
+            raise EscapePodProxyException("Intent name is mandatory")
 
         if intent == None: intent = f"intent_{name}"
         new_intent = escapepod_intent(name=name, intent=intent, utterance_list=keywords, description=description)

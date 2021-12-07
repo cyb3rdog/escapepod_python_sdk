@@ -86,7 +86,7 @@ class escapepod_intent():
         def deserialize(data: json):
             # TODO: block_list & parser
             return escapepod_intent.options(data['external_parser'])
-    
+
         def from_json(data: str):
             return escapepod_intent.options.deserialize(json.loads(data))
 
@@ -101,13 +101,13 @@ class escapepod_intent():
 
         self.extended_options = escapepod_intent.options(_external_parser = True)
         self.response_parameters = dict()
-        self.response_parameters["final_intent"] = self.intent        
+        self.response_parameters["final_intent"] = self.intent
 
-    @property 
+    @property
     def id(self) -> object_id:
         return self._id or escapepod_intent.object_id.empty()
 
-    @property 
+    @property
     def json(self) -> str:
         return json.dumps(self._json, indent=2) or ""
 
@@ -157,4 +157,3 @@ class escapepod_intent():
             result.append(escapepod_intent.from_json(intentJson))
         return result
 
-    
